@@ -1,16 +1,16 @@
-对Vision Transformer架构的简单复现，在 MacBook Air M1 上对MNIST数据集训练了50的epoch，在测试集上的准确率高于 98%。
+对Vision Transformer架构的简单复现，在 MNIST 训练集上训练了50个 epoch，在测试集上的准确率高于 98%。
 
 主要参考[该视频](https://www.bilibili.com/video/BV13K421h79z?spm_id_from=333.788.player.switch&vd_source=2bfbdd4fe05b01e4b33773a718e322a1&trackid=web_related_0.router-related-2479604-tn27s.1776492883324.195)，对架构稍作修改。
 
 ----------------------------
-## 架构 (ICLR 2021)
+## 架构 ([ICLR 2021](https://openreview.net/pdf?id=YicbFdNTTy))
 
 ![](ViT.png)
  
 ### 分割图片并线性投影
 
-以一个  1x28x28 大小的图片 (Channel = 1, H = W = 28)，patch大小为4x4为例。
-对每一个patch，我们把它展平成一个一维长 embedding 形式，方便传入Transformer。经过Linear Projection 之后，1x28x28 大小的图片应该转化为 16x49 大小的 token 序列，即共有49个token，每个token的embedding长度为16。
+以一个  1x28x28 大小的图片 (Channel = 1, H = W = 28)，patch大小为 4x4 为例。
+对每一个patch，我们把它展平成一个一维的长 embedding 形式，方便传入 Transformer。经过Linear Projection 之后，1x28x28 大小的图片应该转化为 16x49 大小的 token 序列，即共有49个 token，每个 token 的 embedding 长度为16。
 
 实际上，这个线性投影等价于一个卷积层，所以我们也可以直接用一个卷积层实现线性投影逻辑。
 ```
